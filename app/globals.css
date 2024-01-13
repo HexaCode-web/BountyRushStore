@@ -1,0 +1,269 @@
+/* 
+theme
+#ED1A4E
+#EE233A 
+*/
+/*
+=============
+SCROLL BAR
+===========
+*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/*
+=============
+GENERAL
+===========
+*/
+.reviewWrapper {
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.tableWrapper {
+  max-width: 1200px;
+  min-width: 900px;
+  margin: auto;
+  border-radius: 15px;
+}
+/*ORDER STATUS STYLES*/
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(221, 11, 11);
+  border-radius: 5px;
+  width: 70px;
+  height: 15px;
+  padding: 20px;
+  margin: 10px;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.overlay img {
+  width: 150px;
+}
+.loadingOverlay {
+  transform: 0.5s all;
+  opacity: 1;
+}
+.loadingOverlay.hidden {
+  opacity: 0;
+}
+body {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100vh;
+  min-height: 100%;
+  display: flex;
+  background-color: #f4f5fa !important;
+  flex-direction: column;
+  color: black !important;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bolder;
+}
+.OldPrice {
+  opacity: 0.5 !important;
+  margin-right: 20px;
+  text-decoration: line-through;
+}
+.button:hover {
+  scale: 1.05;
+  background-color: #9b1e2b;
+  color: white;
+}
+
+.button {
+  margin: 10px;
+  border-radius: 5px !important;
+  color: black ;
+  border: 1px solid #9b1e2b !important;
+}
+button {
+  cursor: pointer;
+  border: 1px solid green;
+  color: black;
+  border-radius: 5px;
+}
+.Danger {
+  border: 1px solid #9b1e2b;
+}
+.Danger:hover {
+  background-color: #d9534f;
+  border-radius: 5px;
+}
+/*
+=============
+PRODUCT PREVIEW
+===========
+*/
+.carousel-item img {
+  max-width: 600px;
+  max-height: 400px;
+  min-width: 400px;
+  min-height: 400px;
+  border-radius: 15px;
+  margin: 0 auto;
+}
+.productReview .description {
+  max-width: 600px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.productReview {
+  margin: 60px 15px;
+  width: 45%;
+  display: flex;
+  max-height: 600px;
+  min-height: 600px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.productReview .OldPrice {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+@keyframes slideFromBtm {
+  0% {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.productReview .rating img {
+  width: 15px;
+}
+.Stock {
+  color: white;
+  border: 1px solid green;
+  margin: auto 0px;
+  width: fit-content;
+  padding: 0 10px;
+  border-radius: 50px;
+  background-color: green;
+  font-weight: lighter;
+  letter-spacing: 1.5px;
+}
+.productReview .Stock {
+  scale: 0.9;
+  margin: 20px auto;
+  font-weight: 500;
+  color: white;
+  border: 1px solid green;
+
+  width: fit-content;
+  padding: 0 10px;
+  border-radius: 50px;
+  background-color: green;
+
+  letter-spacing: 1.5px;
+}
+/*
+  SIGNUP PAGE/LOGIN
+*/
+.Container,
+.Profile {
+  margin-top: 60px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Container form {
+  margin-top: 30px;
+  border: 2px solid #ed1a4e;
+  padding: 30px;
+  border-radius: 10px;
+  min-height: 300px;
+  transition: 0.5s all;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Container .formItem,
+.AddAdmin-form .formItem,
+.AddCate .formItem {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  transition: 0.5s all;
+}
+.AddCate .formItem {
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+}
+
+.card,
+.cart,
+button,
+textarea {
+  --c: #ee233a; /* the border color */
+  --b: 2px; /* the border thickness*/
+  --g: 5px; /* the gap on hover */
+  padding: calc(var(--g) + var(--b));
+  --_g: #0000 25%, var(--c) 0;
+  background: conic-gradient(
+        from 180deg at top var(--b) right var(--b),
+        var(--_g)
+      )
+      var(--_i, 200%) 0 /200% var(--_i, var(--b)) no-repeat,
+    conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0
+      var(--_i, 200%) / var(--_i, var(--b)) 200% no-repeat;
+  transition: 0.3s, background-position 0.3s 0.3s;
+}
+
+.card:hover,
+.cart:hover,
+button:hover,
+textarea:focus {
+  border: none;
+  outline: none;
+  --_i: 100%;
+  transition: 0.3s, background-size 0.3s 0.3s;
+}
+.Container input[type="submit"] {
+  border: none;
+  width: 100%;
+  margin-top: 15px;
+}

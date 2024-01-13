@@ -1,0 +1,84 @@
+.Editor {
+  max-width: 1200px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding-top: 15px;
+  margin-top: 60px;
+}
+.Editor .toolBar {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+p:empty::before {
+  content: "";
+  display: inline-block;
+}
+.Editor .toolBar button {
+  font-size: inherit;
+  font-family: inherit;
+  color: #000;
+  margin: 0.1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.4rem;
+  background: white;
+  accent-color: #ccc;
+  transition: 0.5s all;
+}
+.Editor .toolBar .is-active {
+  background-color: black;
+  color: white;
+}
+
+.Editor .output {
+  width: 100%;
+  padding: 10px;
+  height: fit-content;
+  min-height: 200px;
+}
+.Editor .output:focus {
+  outline: none;
+}
+.Editor .toolBar .colorPicker {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+}
+.text-type-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 100px;
+  border-radius: 10px;
+}
+.dropdown-content div {
+  margin: 8px;
+
+  cursor: pointer;
+}
+.dropdown-content div:hover {
+  background-color: #ddd;
+}
+/* Show the dropdown menu on hover */
+.text-type-dropdown:hover .dropdown-content {
+  display: block;
+}
