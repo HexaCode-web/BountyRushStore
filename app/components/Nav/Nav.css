@@ -88,6 +88,7 @@
   position: relative;
 }
 .dropDown-wrapper .DropDown {
+  background-color: #f4f5fa;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -98,7 +99,6 @@
   width: 50px;
   height: 150px;
 
-  border: 1px solid #9b1e2b;
   border-radius: 15px;
   animation: BounceIn 1s;
 }

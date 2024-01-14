@@ -226,23 +226,23 @@ export default function Product() {
   return (
     <>
       <Nav />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {inactive && <Loading loading={inactive} />}
       {Error ? (
         <NotFound />
       ) : !isLoading ? (
         <div>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
           <div className="Details">
             <div className="left">
               <div className="MainIMG-wrapper">
@@ -259,8 +259,8 @@ export default function Product() {
                 {Product.description}
               </p>
               {/* <div className="Sold-wrapper animate__animated animate__fadeInRightBig">
-                <div>{Product.Sold} users bought this</div>
-              </div> */}
+                  <div>{Product.Sold} users bought this</div>
+                </div> */}
 
               <div className="Price-Stock-wrapper  animate__animated animate__fadeInRightBig">
                 $ {""}
@@ -326,22 +326,21 @@ export default function Product() {
               </div>
             </div>
           </div>
-
-          <h2> Similar Products</h2>
-          {matchingProducts.length > 0 && (
-            <Swiper
-              freeMode={true}
-              slidesPerView={5}
-              spaceBetween={10}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Pagination]}
-              className="mySwiper"
-            >
-              {NewProducts}
-            </Swiper>
-          )}
+          {/* <h2> Similar Products</h2>
+            {matchingProducts.length > 0 && (
+              <Swiper
+                freeMode={true}
+                slidesPerView={5}
+                spaceBetween={10}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination]}
+                className="mySwiper"
+              >
+                {NewProducts}
+              </Swiper>
+            )} */}
         </div>
       ) : (
         ""

@@ -8,6 +8,8 @@ import CreateToast from "@/lib/createToast";
 import decrypt from "@/lib/decrypt";
 import Nav from "../components/Nav/Nav";
 import getCurrentDateFormatted from "@/lib/getCurrentDateFormatted";
+import OnlinePayment from "./OnlinePayment";
+import { ToastContainer } from "react-toastify";
 export default function Page() {
   const [activeUser, setActiveUser] = React.useState({});
   const [LocalCart, setLocalCart] = React.useState([]);
@@ -16,12 +18,57 @@ export default function Page() {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const [choice, SetChoice] = useState("");
   const [Total, setTotal] = React.useState(0);
+
+  const [order, setOrder] = useState({
+    items: [],
+    user: null,
+    ID: generateId(),
+    status: "",
+    paymentMethod: "",
+    DateActionTaken: "",
+    CreatedAt: "",
+    orderAmount: "",
+  });
   function generateId() {
     const randomNumber = Math.floor(Math.random() * 100000000);
     const id = randomNumber.toString().padStart(8, "0");
     return id;
   }
-
+  const generateOrder = async () => {
+    if (LocalCart.length === 0) {
+      CreateToast("Please add some items to the cart first", "error");
+      return;
+    }
+    for (const element of LocalCart) {
+      const fetchedProduct = await GETDOC("products", element.id);
+      if (fetchedProduct.stock > 0) {
+        setOrder((prev) => {
+          return {
+            ...prev,
+            items: [
+              ...prev.items,
+              {
+                ...element,
+                category: "DIGITAL_GOODS",
+                amount_cents: element.price * 100,
+                quantity: 1,
+                name: element.title,
+              },
+            ],
+            user: activeUser.id,
+            CreatedAt: getCurrentDateFormatted(),
+            amount_cents: Total.toFixed(0) * 100,
+          };
+        });
+        CreateToast(`${element.title} Added to the order`, "success");
+      } else {
+        CreateToast(
+          `${element.title} wasn't added, it's out of stock`,
+          "error"
+        );
+      }
+    }
+  };
   const AddToPending = async () => {
     if (LocalCart.length === 0) {
       CreateToast("Please add some items to the cart first", "error");
@@ -38,7 +85,6 @@ export default function Page() {
         ID: generateId(),
         status: "",
         paymentMethod: "",
-        PaymentPhotoProof: "",
         DateActionTaken: "",
         CreatedAt: getCurrentDateFormatted(),
       };
@@ -198,10 +244,37 @@ export default function Page() {
     };
     CheckUser();
   }, []);
-  console.log(Total);
+  useEffect(() => {
+    if (showSideMenu) {
+      generateOrder();
+    } else {
+      setOrder({
+        items: [],
+        user: null,
+        ID: generateId(),
+        status: "",
+        paymentMethod: "",
+        DateActionTaken: "",
+        CreatedAt: "",
+        amount_cents: "",
+      });
+    }
+  }, [showSideMenu]);
   return (
     <>
       <Nav />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="Cart container">
         {isLoading && (
           <div className="overlay">
@@ -287,26 +360,10 @@ export default function Page() {
             <button
               className="SideMenuButton"
               onClick={() => {
-                SetChoice("InstaPay");
+                SetChoice("Bank");
               }}
             >
-              InstaPay
-            </button>
-            <button
-              className="SideMenuButton"
-              onClick={() => {
-                SetChoice("VodafoneCash");
-              }}
-            >
-              Vodafone Cash
-            </button>
-            <button
-              className="SideMenuButton"
-              onClick={() => {
-                SetChoice("PayPal");
-              }}
-            >
-              PayPal
+              Bank
             </button>
             {activeUser?.Wallet > Total && (
               <button
@@ -333,23 +390,24 @@ export default function Page() {
                 <button className="button">Pay now</button>
               </div>
             )}
-            {choice === "PayPal" && (
-              <div className="paymentWrapper">
-                <div style={{ width: "100%" }}>
-                  <h5>Instructions</h5>
-                  <ol>
-                    <li>
-                      follow the this link{" "}
-                      <a
-                        href="https://paypal.me/marcokhairy32?country.x=EG&locale.x=en_US"
-                        target="_blank"
-                      >
-                        PayPal Link
-                      </a>
-                    </li>
-                  </ol>
-                </div>
-              </div>
+            {choice === "Bank" && (
+              <OnlinePayment order={order} />
+              // <div className="paymentWrapper">
+              //   <div style={{ width: "100%" }}>
+              //     <h5>Instructions</h5>
+              //     <ol>
+              //       <li>
+              //         follow the this link{" "}
+              //         <a
+              //           href="https://paypal.me/marcokhairy32?country.x=EG&locale.x=en_US"
+              //           target="_blank"
+              //         >
+              //           PayPal Link
+              //         </a>
+              //       </li>
+              //     </ol>
+              //   </div>
+              // </div>
             )}
           </div>
         </div>
