@@ -5,16 +5,13 @@ import "./globals.css";
 import GETDOC from "@/lib/getDoc";
 import React, { useEffect, useState } from "react";
 import GETCOLLECTION from "@/lib/getCollection";
-import SETDOC from "@/lib/setDoc";
-import CreateToast from "@/lib/createToast";
 import { ToastContainer } from "react-toastify";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
-import "bootstrap/dist/js/bootstrap.min.js";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import "animate.css";
 
 import Loading from "./loading";
 export default function Home() {
@@ -49,22 +46,6 @@ export default function Home() {
     await GETCOLLECTION("products").then((res) => SetData(res));
     setLoading(false);
   }
-  const UpdateUser = async (
-    targetUser,
-
-    popups
-  ) => {
-    try {
-      await SETDOC("users", targetUser.id, { ...targetUser });
-      sessionStorage.setItem("activeUser", JSON.stringify(targetUser));
-      popups
-        ? CreateToast("your changes have been saved", "success", 3000)
-        : "";
-    } catch (error) {
-      console.log(error);
-      popups ? CreateToast("something went wrong", "error", 3000) : "";
-    }
-  };
 
   useEffect(() => {
     GetData();

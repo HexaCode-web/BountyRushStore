@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+
 export default function Carousel(props) {
   const slideBtn = props.images.map((photo, index) => {
     return (
