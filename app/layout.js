@@ -1,7 +1,6 @@
 import GETDOC from "@/lib/getDoc";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
-import "animate.css";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic"],
